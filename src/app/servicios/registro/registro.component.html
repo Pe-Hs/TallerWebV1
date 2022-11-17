@@ -1,0 +1,59 @@
+<mat-dialog-content fxLayout="column">
+
+    <h1>Registro de Nuevo Servicio</h1>
+    <mat-divider></mat-divider>
+ 
+    <form [formGroup]="servicioForm" >
+
+        <div fxLayout="column" style="padding-top: 20px;" fxLayoutGap="15">
+        
+            <div fxFlex="100" fxLayoutGap="20px" fxLayout="row">
+    
+                <mat-form-field appearance="fill">
+                    <mat-label>Nombre del Servicio</mat-label>
+                    <input matInput oninput="this.value = this.value.toUpperCase()"
+                           formControlName="nombreServicio"
+                           type="text"
+                           [(ngModel)]="servicio.nombreServicio"
+                           required>
+                           <mat-error *ngIf="servicioForm.get('nombreServicio')?.hasError('required')">Ingrese <strong>  Nombre Servicio </strong> </mat-error>
+                           <mat-error *ngIf="servicioForm.get('nombreServicio')?.hasError('pattern')"> Solo Ingrese <strong>  Letras </strong> </mat-error>
+                </mat-form-field>
+        
+                <mat-form-field appearance="fill">
+                    <mat-label>Costo del Servicio (S/.)</mat-label>
+                    <input matInput
+                           formControlName="costo"
+                           type="text"
+                           [(ngModel)]="servicio.costo"
+                           required>
+                           <mat-error *ngIf="servicioForm.get('costo')?.hasError('required')">Ingrese <strong>  Costo del Servicio </strong> </mat-error>
+                           <mat-error *ngIf="servicioForm.get('costo')?.hasError('pattern')"> Ingrese solo  <strong>  Numeros </strong> </mat-error>
+                </mat-form-field>
+        
+            </div>
+        
+            <mat-form-field appearance="fill">
+                <mat-label>Descripcion del Servicio</mat-label>
+                <textarea matInput 
+                       formControlName="descripcion"
+                       type="text"
+                       [(ngModel)]="servicio.descripcion">
+                </textarea>
+                       <mat-error *ngIf="servicioForm.get('descripcion')?.hasError('required')">Ingrese una <strong>  Descripcion </strong> </mat-error>
+            </mat-form-field>
+    
+        </div>
+
+        <div fxLayout="row" style="padding-top: 20px;">
+            <span class="spacer" ></span>
+            <button mat-raised-button color="primary" (click)="guardar()"> Registrar </button>
+        </div>
+
+    </form>
+
+</mat-dialog-content>
+
+<mat-dialog-actions >
+    <button mat-raised-button color="warn" (click)="close()"> Cancel </button>
+</mat-dialog-actions>

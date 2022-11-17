@@ -1,0 +1,130 @@
+<mat-dialog-content fxLayout="column">
+
+    <h1>Registro de Usuario</h1>
+    <mat-divider></mat-divider>
+ 
+    <form [formGroup]="usuarioForm" >
+
+        <div fxLayout="column" style="padding-top: 20px;" fxLayoutGap="15">
+        
+            <div fxFlex="100" fxLayoutGap="20px" fxLayout="row">
+    
+                <mat-form-field appearance="fill">
+                    <mat-label>Nombres</mat-label>
+                    <input matInput oninput="this.value = this.value.toUpperCase()"
+                           formControlName="nombreCliente"
+                           type="text"
+                           [(ngModel)]="usuario.nombreUsuario"
+                           required>
+                           <mat-error *ngIf="usuarioForm.get('nombreCliente')?.hasError('required')">Ingrese <strong>  Nombre </strong> </mat-error>
+                           <mat-error *ngIf="usuarioForm.get('nombreCliente')?.hasError('pattern')"> Solo Ingrese <strong>  Letras </strong> </mat-error>
+                </mat-form-field>
+        
+                <mat-form-field appearance="fill">
+                    <mat-label>Apellidos</mat-label>
+                    <input matInput oninput="this.value = this.value.toUpperCase()"
+                           formControlName="apellidoCliente"
+                           type="text"
+                           [(ngModel)]="usuario.apellidoUsuario"
+                           required>
+                           <mat-error *ngIf="usuarioForm.get('apellidoCliente')?.hasError('required')">Ingrese <strong>  Apellido </strong> </mat-error>
+                           <mat-error *ngIf="usuarioForm.get('apellidoCliente')?.hasError('pattern')"> Solo Ingrese <strong>  Letras </strong> </mat-error>
+                </mat-form-field>
+        
+            </div>
+        
+            <mat-form-field appearance="fill">
+                <mat-label>E-mail</mat-label>
+                <input matInput 
+                       formControlName="email"
+                       placeholder="Ejm: ramirez@gmail.com"
+                       type="email"
+                       [(ngModel)]="usuario.email">
+                       <mat-error *ngIf="usuarioForm.get('email')?.hasError('email')">Ingrese formato <strong>  Valido </strong> </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Domicilio</mat-label>
+                <input matInput
+                       formControlName="domicilio"
+                       placeholder="Ejm: Jr. Los Rosales 654, Surco"
+                       type="email"
+                       [(ngModel)]="usuario.domicilio">
+                       <mat-error *ngIf="usuarioForm.get('domicilio')?.hasError('maxLength')">Ingrese solo <strong>  200 Caracteres </strong> </mat-error>
+            </mat-form-field>
+    
+            <div fxFlex="100" fxLayoutGap="20px" fxLayout="row">
+    
+                <mat-form-field appearance="fill">
+                    <mat-label>Telefono</mat-label>
+                    <input matInput 
+                           type="text"
+                           formControlName="telefono"
+                           [(ngModel)]="usuario.telefono"
+                           required>
+                        <mat-error *ngIf="usuarioForm.get('telefono')?.hasError('required')">Ingrese <strong>  Telefono </strong> </mat-error>
+                        <mat-error *ngIf="usuarioForm.get('telefono')?.hasError('pattern')"> Solo Ingrese <strong>  Numeros </strong> </mat-error>
+                        <mat-error *ngIf="!usuarioForm.get('telefono')?.hasError('minLength') || !usuarioForm.get('telefono')?.hasError('maxLength') "> 
+                            Solo Ingrese <strong>  9 Digitos </strong> 
+                        </mat-error> 
+                </mat-form-field>
+    
+                <mat-form-field appearance="fill">
+                    <mat-label>D.N.I</mat-label>
+                    <input matInput
+                           type="text"
+                           formControlName="dni"
+                           [(ngModel)]="usuario.dni"
+                           required>
+                        <mat-error *ngIf="usuarioForm.get('dni')?.hasError('required')">Ingrese <strong>  DNI </strong> </mat-error>
+                        <mat-error *ngIf="usuarioForm.get('dni')?.hasError('pattern')"> Solo Ingrese <strong>  Numeros </strong> </mat-error>
+                        <mat-error *ngIf="!usuarioForm.get('dni')?.hasError('minLength') || !usuarioForm.get('telefono')?.hasError('maxLength') "> 
+                            Solo Ingrese <strong>  8 Digitos </strong> 
+                        </mat-error>
+                </mat-form-field>
+    
+            </div>
+
+            <div fxFlex="100" fxLayoutGap="20px" fxLayout="row">
+    
+                <mat-form-field appearance="fill">
+                    <mat-label>Usuario</mat-label>
+                    <input matInput 
+                           type="text"
+                           formControlName="usuario"
+                           [(ngModel)]="usuario.usuario"
+                           required>
+                        <mat-error *ngIf="usuarioForm.get('usuario')?.hasError('required')">Ingrese <strong>  Telefono </strong> </mat-error>
+                        <mat-error *ngIf="usuarioForm.get('usuario')?.hasError('pattern')"> Solo Ingrese <strong>  Numeros o Letras </strong> </mat-error>
+                      
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+
+                    <mat-label>Contraseña</mat-label>
+                    <input matInput 
+                           [type]="hide ? 'password' : 'text'" 
+                           formControlName="password"  
+                           [(ngModel)]="usuario.password"  
+                           required>
+                    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                    <mat-error *ngIf="usuarioForm.get('password')?.hasError('required')">Ingrese <strong>  Contraseña </strong> </mat-error>
+
+                  </mat-form-field>
+    
+            </div>
+    
+        </div>
+
+        <div fxLayout="row" style="padding-top: 20px;">
+            <span class="spacer" ></span>
+            <button mat-raised-button color="primary" (click)="registrarUsuario()" > Registrar </button>
+        </div>
+
+    </form>
+
+</mat-dialog-content>
+
+<mat-dialog-actions >
+    <button mat-raised-button color="warn" (click)="close()"> Cancel </button>
+</mat-dialog-actions>

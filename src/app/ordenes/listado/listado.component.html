@@ -1,0 +1,89 @@
+<div class="intro">
+  <h1>Listado de <strong>Ordenes de Trabajo</strong> </h1>
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <h3>Taller > Clientes </h3>
+    <h3> {{ myDate | date: 'fullDate'}} </h3>
+  </div>
+</div>
+
+<div style="padding-left: 20px; padding-right: 20px; padding-top: 20px;">
+
+  <div style="height: 60px;">
+
+    <button mat-raised-button color="primary" routerLink="/ordenTrabajo/registro">
+      <mat-icon>add</mat-icon>
+      Agregar Orden
+    </button>
+
+  </div>
+
+  <div class="filter" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20">
+
+    <div style="width: 10px;"></div>
+    <mat-icon>filter_list</mat-icon>
+    <mat-form-field appearance="standard">
+      <input matInput (keyup)="applyFilter($event)" placeholder="Buscar..." #input>
+    </mat-form-field>
+    <div style="width: 40px;"></div>
+  </div>
+</div>
+
+<div style="padding-left: 20px; padding-right: 20px;">
+
+  <mat-table [dataSource]="dataSource">
+
+    <ng-container matColumnDef="placa">
+      <mat-header-cell *matHeaderCellDef> PLACA </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.placa}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="marca">
+      <mat-header-cell *matHeaderCellDef> MARCA </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.marca}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="nombreCliente">
+      <mat-header-cell *matHeaderCellDef> CLIENTE </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.nombreCliente}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="nombreUsuario">
+      <mat-header-cell *matHeaderCellDef> ASIGNADO A </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.nombreUsuario}} </mat-cell>
+    </ng-container>
+
+    <!-- <ng-container matColumnDef="nombreEstado">
+      <mat-header-cell *matHeaderCellDef> ESTADO </mat-header-cell>
+      <mat-cell *matCellDef="let element" [ngStyle]="{'background-color': element.nombreEstado == 'RECIBIDO' ? '#EEC55A' : 
+                                          element.nombreEstado == 'AUTORIZADO' ? '#A643E2' : 
+                                          element.nombreEstado == 'EN PROCESO' ? '#4983DA' : 
+                                          element.nombreEstado == 'FINALIZADO' ? '#51B422' : ''
+                      }">
+        {{element.nombreEstado}}
+      </mat-cell>
+    </ng-container> -->
+
+    <ng-container matColumnDef="actions">
+
+      <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+
+      <mat-cell *matCellDef="let element">
+
+        <button mat-button>
+          <mat-icon>info</mat-icon>
+        </button>
+
+        <button mat-button>
+          <mat-icon>edit</mat-icon>
+        </button>
+
+      </mat-cell>
+
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <mat-paginator #paginator [pageIndex]="0" [pageSize]="5" [pageSizeOptions]="[5, 10, 15]"></mat-paginator>
+</div>

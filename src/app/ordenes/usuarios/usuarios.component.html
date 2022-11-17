@@ -1,0 +1,58 @@
+<h1>Lista de Trabajadores</h1>
+
+<mat-divider></mat-divider>
+
+<div class="filter" class="mat-elevation-z1" fxLayout="row" fxLayoutAlign="start center">
+
+    <div style="width: 3% ;"></div>
+    <h3>Filtro de Busqueda</h3>
+    <div style="width: 3% ;"></div>
+    <mat-form-field appearance="standard" fxFlex="100">
+        <mat-label>Buscar</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ejm: DNI, Nombre, Apellido" #input>
+    </mat-form-field>
+
+</div>
+
+<section style="overflow: auto; height: 300px;">
+
+    <mat-table [dataSource]="dataSource" class="mat-elevation-z1">
+
+        <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <button mat-raised-button color="warn" (click)="seleccionarUsuario(element)">
+                    <mat-icon>check</mat-icon>
+                </button>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="dni">
+            <mat-header-cell *matHeaderCellDef> DNI </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.dni}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="nombreUsuario">
+            <mat-header-cell *matHeaderCellDef> NOMBRE </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.nombreUsuario}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="apellidoUsuario">
+            <mat-header-cell *matHeaderCellDef> APELLIDO </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.apellidoUsuario}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+    </mat-table>
+
+</section>
+
+<mat-paginator class="mat-elevation-z1" #paginator [pageIndex]="0" [pageSize]="10" [pageSizeOptions]="[5, 10, 15]"></mat-paginator>
+
+<mat-dialog-actions >
+    <button mat-raised-button (click)="close()" color="primary">
+        Cancelar
+    </button>
+</mat-dialog-actions>

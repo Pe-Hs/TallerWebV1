@@ -1,0 +1,50 @@
+<mat-dialog-content>
+    <h2> Historial de Motivos </h2>
+    <mat-divider></mat-divider>
+
+    <div fxLayout="Column" fxLayoutGap="20">
+
+
+        <div>
+
+            <mat-table [dataSource]="dataSource" class="mat-elevation-z0">
+
+                <ng-container matColumnDef="actions">
+                    <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <button mat-raised-button color="warn">
+                            <mat-icon>event_note</mat-icon>
+                            Motivos
+                        </button>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="fecha">
+                    <mat-header-cell *matHeaderCellDef> FECHA </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.fecha | date:'medium' }} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="descripcion">
+                    <mat-header-cell *matHeaderCellDef> DESCRIPCION </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.descripcion}} </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+            </mat-table>
+            <mat-paginator class="mat-elevation-z1" #paginator [pageIndex]="0" [pageSize]="5"
+                [pageSizeOptions]="[5, 10, 15]"></mat-paginator>
+        </div>
+
+
+    </div>
+
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+
+    <button mat-raised-button color="warn" (click)="close()"> Cerrar </button>
+
+</mat-dialog-actions>

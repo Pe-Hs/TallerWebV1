@@ -1,0 +1,63 @@
+<h1>Lista de Vehiculos</h1>
+
+<mat-divider></mat-divider>
+
+<div class="filter" class="mat-elevation-z1" fxLayout="row" fxLayoutAlign="start center">
+
+    <div style="width: 3% ;"></div>
+    <h3>Filtro de Busqueda</h3>
+    <div style="width: 3% ;"></div>
+    <mat-form-field appearance="standard" fxFlex="100">
+        <mat-label>Buscar</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ejm: Placa, Marca, Modelo" #input>
+    </mat-form-field>
+
+</div>
+
+<div>
+
+    <mat-table [dataSource]="dataSource" class="mat-elevation-z1">
+
+        <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <button mat-raised-button color="warn" (click)="seleccionarVehiculo(element)" >
+                    <mat-icon>check</mat-icon>
+                </button>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="placa">
+            <mat-header-cell *matHeaderCellDef> PLACA </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.placa}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="marca">
+            <mat-header-cell *matHeaderCellDef> MARCA </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.marca}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="modelo">
+            <mat-header-cell *matHeaderCellDef> MODELO </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.modelo}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="color">
+            <mat-header-cell *matHeaderCellDef> COLOR </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.color}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+    </mat-table>
+
+    <mat-paginator class="mat-elevation-z1" #paginator [pageIndex]="0" [pageSize]="5" [pageSizeOptions]="[5, 10, 15]">
+    </mat-paginator>
+</div>
+
+<mat-dialog-actions >
+    <button mat-raised-button (click)="close()" color="primary">
+        Cancelar
+    </button>
+</mat-dialog-actions>

@@ -1,0 +1,53 @@
+<h1>Lista de Servicios</h1>
+
+<mat-divider></mat-divider>
+
+<div class="filter" class="mat-elevation-z1" fxLayout="row" fxLayoutAlign="start center">
+
+    <div style="width: 3% ;"></div>
+    <h3>Filtro de Busqueda</h3>
+    <div style="width: 3% ;"></div>
+    <mat-form-field appearance="standard" fxFlex="100">
+        <mat-label>Buscar</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ejm: Nombre del Servicio" #input>
+    </mat-form-field>
+
+</div>
+
+<section style="overflow: auto; height: 300px;">
+
+    <mat-table [dataSource]="dataSource" class="mat-elevation-z1">
+
+        <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <button mat-raised-button color="warn" (click)="seleccionarSericio(element)">
+                    <mat-icon>check</mat-icon>
+                </button>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="nombreServicio">
+            <mat-header-cell *matHeaderCellDef> SERVICIO </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.nombreServicio}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="costo">
+            <mat-header-cell *matHeaderCellDef> COSTO (S./) </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.costo}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+    </mat-table>
+
+</section>
+
+<mat-paginator class="mat-elevation-z1" #paginator [pageIndex]="0" [pageSize]="10" [pageSizeOptions]="[5, 10, 15]"></mat-paginator>
+
+<mat-dialog-actions >
+    <button mat-raised-button (click)="close()" color="primary">
+        Cancelar
+    </button>
+</mat-dialog-actions>

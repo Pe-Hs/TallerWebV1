@@ -1,0 +1,15 @@
+
+<mat-dialog-content>
+    <h1> Servicio:  <small> {{servicio.nombreServicio}} </small> </h1>
+    <mat-divider></mat-divider>
+    <br>
+    <h2> Costo(S./): {{servicio.costo}} </h2>
+    <br>
+    <h3> {{servicio.descripcion}} </h3>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+
+    <button mat-raised-button color="warn" (click)="close()"> Cerrar </button>
+
+</mat-dialog-actions>

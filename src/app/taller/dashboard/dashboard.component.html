@@ -1,0 +1,122 @@
+<div class="intro">
+    <h1>Dashboard <strong> - </strong> </h1>
+    <h3>Taller</h3>
+</div>
+
+<div style="padding: 20px ;" fxLayout="column" fxLayoutGap="20">
+
+    <div fxLayout="row" fxLayoutGap="20" >
+       
+        <button mat-raised-button color="primary" (click)="clienteNuevo()">
+            <mat-icon>start</mat-icon>
+           Nuevo Cliente
+        </button>
+        <button mat-raised-button color="primary" (click)="vehiculoNuevo()">
+            <mat-icon>start</mat-icon>
+            Nuevo Vehiculo
+        </button>
+        <button mat-raised-button color="primary" (click)="motivoNuevo()">
+            <mat-icon>start</mat-icon>
+            Nuevo Motivo
+        </button>
+        <span class="spacer"></span>
+        <button mat-raised-button  color="warn" (click)="reloadComponent(true)" > 
+            <mat-icon>refresh</mat-icon>
+            Actualizar
+        </button>
+
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="20">
+
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>Capacidad del Taller</mat-card-title>
+                <mat-card-subtitle>Vehiculos en el Taller</mat-card-subtitle>
+            </mat-card-header>
+        </mat-card>
+
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>Disponibilidad</mat-card-title>
+                <mat-card-subtitle>Dispobilidad de Mecanicos</mat-card-subtitle>
+            </mat-card-header>
+        </mat-card>
+
+    </div>
+
+    
+    <div fxLayout="row" fxLayoutGap="20">
+
+        <mat-card fxFlex>
+            <mat-card-header>
+                <mat-card-title>Reporte de Ventas</mat-card-title>
+                <mat-card-subtitle>Ventas realizadas recientemente </mat-card-subtitle>
+                
+            </mat-card-header>
+        </mat-card>
+
+        <div fxLayout="column" fxLayoutGap="20">
+
+            <div fxLayout="row" fxLayoutGap="20">
+
+                <mat-card fxFlex>
+                    <mat-card-header>
+                        <mat-card-title>Ganancias <strong> Totales </strong> </mat-card-title>
+                        <mat-card-subtitle>Ganacias por Servicos (S./) </mat-card-subtitle>
+                        
+                    </mat-card-header>
+                </mat-card>
+
+                <mat-card fxFlex>
+                    <mat-card-header>
+                        <mat-card-title>Clientes <strong> Totales </strong> </mat-card-title>
+                        <mat-card-subtitle>Numero de Clientes Registrados </mat-card-subtitle>
+                        
+                    </mat-card-header>
+                    <mat-card-content >
+                        <div class="dash-icon" fxLayout="row" style="padding-top: 10px; padding-bottom: 10px ;">
+                            <mat-icon [inline]="true" >groups</mat-icon>
+                            <div style="width: 10px;"></div> 
+                            {{dataTaller.nroClientes}}
+                        </div>
+                       
+                        <mat-divider></mat-divider>
+                        <div fxLayout="row" style="padding-top: 5px;">
+                            <span class="spacer" ></span>
+                            <a style="color: rgb(216, 95, 25);" routerLink="/cliente/listado" >Ver mas</a>
+                        </div>
+                    </mat-card-content>
+            
+                </mat-card>
+
+            </div>
+
+            <div fxLayout="row" fxLayoutGap="20">
+
+                <mat-card fxFlex>
+                    <mat-card-header>
+                        <mat-card-title>Ordenes de <strong> Trabajo </strong> </mat-card-title>
+                        <mat-card-subtitle>Ordenes creados Recientemente </mat-card-subtitle>
+                        
+                    </mat-card-header>
+                </mat-card>
+
+                <mat-card fxFlex>
+                    <mat-card-header>
+                        <mat-card-title>Vehiculos en el <strong> Taller </strong> </mat-card-title>
+                        <mat-card-subtitle>Vehiculos Recibidos</mat-card-subtitle>
+                       
+                    </mat-card-header>
+                </mat-card>
+
+            </div>
+            
+
+        </div>
+
+
+    </div>
+        
+
+</div>

@@ -1,0 +1,99 @@
+<mat-dialog-content>
+    <h2>Detalles del Cliente : <strong> {{cliente.nombreCliente + ' ' + cliente.apellidoCliente}} </strong> </h2>
+    <mat-divider style="padding-bottom: 10px;"></mat-divider>
+
+    <div fxLayout="Column" fxLayoutGap="20">
+
+        <div fxLayout="column">
+
+            <div fxFlex="100" fxLayoutGap="20px" fxLayout="row">
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Nombre Cliente</mat-label>
+                    <input matInput type="text" [(ngModel)]="cliente.nombreCliente" disabled>
+                    <!-- <mat-error *ngIf="email.invalid">{{emailEror()}}</mat-error> -->
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Apellido Cliente</mat-label>
+                    <input matInput type="text" [(ngModel)]="cliente.apellidoCliente" disabled>
+                    <!-- <mat-error *ngIf="email.invalid">{{emailEror()}}</mat-error> -->
+                </mat-form-field>
+
+            </div>
+
+            <mat-form-field appearance="fill">
+                <mat-label>E-mail</mat-label>
+                <input matInput disabled placeholder="Ejm: ramirez@gmail.com" type="email" [(ngModel)]="cliente.email">
+                <!-- <mat-error *ngIf="email.invalid">{{emailEror()}}</mat-error> -->
+            </mat-form-field>
+
+            <div fxFlex="100" fxLayoutGap="20px" fxLayout="row">
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Telefono</mat-label>
+                    <input matInput type="text" [(ngModel)]="cliente.telefono" disabled>
+                    <!-- <mat-error *ngIf="email.invalid">{{telefonoError()}}</mat-error> -->
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>D.N.I</mat-label>
+                    <input matInput type="text" [(ngModel)]="cliente.dni" disabled>
+                </mat-form-field>
+
+            </div>
+
+        </div>
+
+        <div>
+            <h2>Vehiculos del Cliente </h2>
+        </div>
+
+        <div>
+
+            <mat-table [dataSource]="dataSource" class="mat-elevation-z1">
+
+                <ng-container matColumnDef="actions">
+                    <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <button mat-raised-button color="warn" (click)="buscarMotivos(element)">
+                            <mat-icon>event_note</mat-icon>
+                            Motivos
+                        </button>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="placa">
+                    <mat-header-cell *matHeaderCellDef> PLACA </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.placa}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="marca">
+                    <mat-header-cell *matHeaderCellDef> MARCA </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.marca}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="modelo">
+                    <mat-header-cell *matHeaderCellDef> MODELO </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.modelo}} </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+            </mat-table>
+            <mat-paginator class="mat-elevation-z1" #paginator [pageIndex]="0" [pageSize]="5"
+                [pageSizeOptions]="[5, 10, 15]"></mat-paginator>
+        </div>
+
+
+    </div>
+
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+
+    <button mat-raised-button color="warn" (click)="close()"> Cerrar </button>
+
+</mat-dialog-actions>

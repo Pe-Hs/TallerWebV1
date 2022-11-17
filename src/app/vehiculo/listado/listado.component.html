@@ -1,0 +1,81 @@
+  <div class="intro">
+    <h1>Listado de <strong>Vehiculos</strong> </h1>
+  
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <h3>Taller > Vehiculos </h3>
+      <h3> {{ myDate | date: 'fullDate'}} </h3>
+    </div>
+  </div>
+  
+  <div style="padding-left: 20px; padding-right: 20px; padding-top: 20px;">
+
+    <div style="height: 60px;">
+
+      <button mat-raised-button color="primary">
+        <mat-icon>add</mat-icon>
+        Agregar Vehiculo
+      </button>
+  
+    </div>
+    
+    <div class="filter" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20">
+  
+      <div style="width: 10px;"></div>
+      <mat-icon>filter_list</mat-icon>
+      <mat-form-field appearance="standard">
+        <input matInput (keyup)="applyFilter($event)" placeholder="Buscar..." #input>
+      </mat-form-field>
+      <div style="width: 40px;"></div>
+    </div>
+  
+  </div>
+  
+  <div style="padding-left: 20px; padding-right: 20px;">
+  
+    <mat-table [dataSource]="dataSource">
+  
+      <ng-container matColumnDef="placa">
+        <mat-header-cell *matHeaderCellDef> PLACA </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.placa}} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="marca">
+        <mat-header-cell *matHeaderCellDef> MARCA </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.marca}} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="modelo">
+        <mat-header-cell *matHeaderCellDef> MODELO </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.modelo}} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="color">
+        <mat-header-cell *matHeaderCellDef> COLOR </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.color}} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="actions">
+  
+        <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+  
+        <mat-cell *matCellDef="let element">
+  
+          <button mat-button (click)="detallesVehiculo(element)">
+            <mat-icon>visibility</mat-icon>
+          </button>
+  
+          <button mat-button>
+            <mat-icon>edit</mat-icon>
+          </button>
+  
+        </mat-cell>
+  
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  
+    <mat-paginator #paginator [pageIndex]="0" [pageSize]="5" [pageSizeOptions]="[5, 10, 15]"></mat-paginator>
+    <div style="height: 30px;"></div>
+  </div>

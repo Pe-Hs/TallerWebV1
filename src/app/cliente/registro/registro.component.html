@@ -1,0 +1,91 @@
+<mat-dialog-content fxLayout="column">
+
+    <h1>Registro de Cliente</h1>
+    <mat-divider></mat-divider>
+ 
+    <form [formGroup]="clienteForm" >
+
+        <div fxLayout="column" style="padding-top: 20px;" fxLayoutGap="15">
+        
+            <div fxFlex="100" fxLayoutGap="20px" fxLayout="row">
+    
+                <mat-form-field appearance="fill">
+                    <mat-label>Nombre Cliente</mat-label>
+                    <input matInput oninput="this.value = this.value.toUpperCase()"
+                           formControlName="nombreCliente"
+                           type="text"
+                           [(ngModel)]="cliente.nombreCliente"
+                           required>
+                           <mat-error *ngIf="clienteForm.get('nombreCliente')?.hasError('required')">Ingrese <strong>  Nombre </strong> </mat-error>
+                           <mat-error *ngIf="clienteForm.get('nombreCliente')?.hasError('pattern')"> Solo Ingrese <strong>  Letras </strong> </mat-error>
+                </mat-form-field>
+        
+                <mat-form-field appearance="fill">
+                    <mat-label>Apellido Cliente</mat-label>
+                    <input matInput oninput="this.value = this.value.toUpperCase()"
+                           formControlName="apellidoCliente"
+                           type="text"
+                           [(ngModel)]="cliente.apellidoCliente"
+                           required>
+                           <mat-error *ngIf="clienteForm.get('apellidoCliente')?.hasError('required')">Ingrese <strong>  Apellido </strong> </mat-error>
+                           <mat-error *ngIf="clienteForm.get('apellidoCliente')?.hasError('pattern')"> Solo Ingrese <strong>  Letras </strong> </mat-error>
+                </mat-form-field>
+        
+            </div>
+        
+            <mat-form-field appearance="fill">
+                <mat-label>E-mail</mat-label>
+                <input matInput 
+                       formControlName="email"
+                       placeholder="Ejm: ramirez@gmail.com"
+                       type="email"
+                       [(ngModel)]="cliente.email">
+                       <mat-error *ngIf="clienteForm.get('email')?.hasError('email')">Ingrese formato <strong>  Valido </strong> </mat-error>
+            </mat-form-field>
+    
+            <div fxFlex="100" fxLayoutGap="20px" fxLayout="row">
+    
+                <mat-form-field appearance="fill">
+                    <mat-label>Telefono</mat-label>
+                    <input matInput 
+                           type="text"
+                           formControlName="telefono"
+                           [(ngModel)]="cliente.telefono"
+                           required>
+                        <mat-error *ngIf="clienteForm.get('telefono')?.hasError('required')">Ingrese <strong>  Telefono </strong> </mat-error>
+                        <mat-error *ngIf="clienteForm.get('telefono')?.hasError('pattern')"> Solo Ingrese <strong>  Numeros </strong> </mat-error>
+                        <mat-error *ngIf="!clienteForm.get('telefono')?.hasError('minLength') || !clienteForm.get('telefono')?.hasError('maxLength') "> 
+                            Solo Ingrese <strong>  9 Digitos </strong> 
+                        </mat-error> 
+                </mat-form-field>
+    
+                <mat-form-field appearance="fill">
+                    <mat-label>D.N.I</mat-label>
+                    <input matInput
+                           type="text"
+                           formControlName="dni"
+                           [(ngModel)]="cliente.dni"
+                           required>
+                        <mat-error *ngIf="clienteForm.get('dni')?.hasError('required')">Ingrese <strong>  DNI </strong> </mat-error>
+                        <mat-error *ngIf="clienteForm.get('dni')?.hasError('pattern')"> Solo Ingrese <strong>  Numeros </strong> </mat-error>
+                        <mat-error *ngIf="!clienteForm.get('dni')?.hasError('minLength') || !clienteForm.get('telefono')?.hasError('maxLength') "> 
+                            Solo Ingrese <strong>  8 Digitos </strong> 
+                        </mat-error>
+                </mat-form-field>
+    
+            </div>
+    
+        </div>
+
+        <div fxLayout="row" style="padding-top: 20px;">
+            <span class="spacer" ></span>
+            <button mat-raised-button color="primary" (click)="guardar()"> Registrar </button>
+        </div>
+
+    </form>
+
+</mat-dialog-content>
+
+<mat-dialog-actions >
+    <button mat-raised-button color="warn" (click)="close()"> Cancel </button>
+</mat-dialog-actions>

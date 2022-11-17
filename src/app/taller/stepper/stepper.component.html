@@ -1,0 +1,289 @@
+<mat-stepper linear #stepper fxLayoutGap="10">
+
+    <mat-step [stepControl]="firstFormGroup">
+
+        <form [formGroup]="firstFormGroup">
+
+            <ng-template matStepLabel>Registrar Cliente</ng-template>
+
+            <div style="padding-top: 10px ;" fxLayout="column" fxLayoutGap="15px" [class.mat-elevation-z3]>
+
+                <h1>Ingresar Datos del Cliente</h1>
+
+                <mat-divider></mat-divider>
+
+                <div fxFlex="100" fxLayoutGap="20px" fxLayout="row">
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Nombre Cliente</mat-label>
+                        <input matInput oninput="this.value = this.value.toUpperCase()" formControlName="nombreCliente"
+                            type="text" [(ngModel)]="cliente.nombreCliente">
+                        <mat-error *ngIf="firstFormGroup.get('nombreCliente')?.hasError('required')">Ingrese <strong>
+                                Nombre </strong> </mat-error>
+                        <mat-error *ngIf="firstFormGroup.get('nombreCliente')?.hasError('pattern')"> Solo Ingrese
+                            <strong> Letras </strong> </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Apellido Cliente</mat-label>
+                        <input matInput oninput="this.value = this.value.toUpperCase()"
+                            formControlName="apellidoCliente" type="text" [(ngModel)]="cliente.apellidoCliente"
+                            required>
+                        <mat-error *ngIf="firstFormGroup.get('apellidoCliente')?.hasError('required')">Ingrese <strong>
+                                Apellido </strong> </mat-error>
+                        <mat-error *ngIf="firstFormGroup.get('apellidoCliente')?.hasError('pattern')"> Solo Ingrese
+                            <strong> Letras </strong> </mat-error>
+                    </mat-form-field>
+
+                </div>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>E-mail (Opcional)</mat-label>
+                    <input matInput formControlName="email" placeholder="Ejm: ramirez@gmail.com" type="email"
+                        [(ngModel)]="cliente.email">
+                    <mat-error *ngIf="firstFormGroup.get('email')?.hasError('email')">Ingrese formato <strong> Valido
+                        </strong> </mat-error>
+                </mat-form-field>
+
+                <div fxFlex="100" fxLayoutGap="20px" fxLayout="row">
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Telefono</mat-label>
+                        <input matInput formControlName="telefono" placeholder="Ejm: 987 654 321" type="text"
+                            [(ngModel)]="cliente.telefono" required>
+                        <mat-error *ngIf="firstFormGroup.get('telefono')?.hasError('required')">Ingrese <strong>
+                                Telefono </strong> </mat-error>
+                        <mat-error *ngIf="firstFormGroup.get('telefono')?.hasError('pattern')"> Solo Ingrese <strong>
+                                Numeros </strong> </mat-error>
+                        <mat-error
+                            *ngIf="!firstFormGroup.get('telefono')?.hasError('minLength') || !firstFormGroup.get('telefono')?.hasError('maxLength') ">
+                            Solo Ingrese <strong> 9 Digitos </strong>
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>D.N.I</mat-label>
+                        <input matInput formControlName="dni" type="text" [(ngModel)]="cliente.dni" required>
+                        <mat-error *ngIf="firstFormGroup.get('dni')?.hasError('required')">Ingrese <strong> DNI
+                            </strong> </mat-error>
+                        <mat-error *ngIf="firstFormGroup.get('dni')?.hasError('pattern')"> Solo Ingrese <strong> Numeros
+                            </strong> </mat-error>
+                        <mat-error
+                            *ngIf="!firstFormGroup.get('dni')?.hasError('minLength') || !firstFormGroup.get('telefono')?.hasError('maxLength') ">
+                            Solo Ingrese <strong> 8 Digitos </strong>
+                        </mat-error>
+                    </mat-form-field>
+
+                </div>
+
+            </div>
+
+            <div style="padding-top: 20px;" fxLayout="row" fxLayoutGap="20" fxFlexAlign="end center">
+                <span class="spacer"></span>
+                <button mat-flat-button color="warn" (click)="registrarCliente()" [disabled]="!isDisable"> Registrar
+                    Cliente </button>
+                <button mat-flat-button color="primary" (click)="buscarCliente()" [disabled]="isDisable"
+                    matStepperNext>Siguiente</button>
+            </div>
+
+        </form>
+
+    </mat-step>
+
+    <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="secondFormGroup">
+            <ng-template matStepLabel>Registrar Vehiculo</ng-template>
+
+            <h1>Ingresar Datos del Vehiculo </h1>
+
+            <mat-divider></mat-divider>
+
+            <div style="padding-top: 20px ;" fxLayout="column" fxLayoutGap="15px">
+
+                <div fxFlex="100" fxLayoutGap="20px" fxLayout="row">
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Numero de Placa</mat-label>
+                        <input matInput oninput="this.value = this.value.toUpperCase()" formControlName="placa"
+                            type="text" placeholder="Ejm: ASD123" [(ngModel)]="vehiculo.placa" required>
+                        <mat-error *ngIf="secondFormGroup.get('placa')?.hasError('required')">Ingrese <strong> Placa
+                            </strong> </mat-error>
+                        <mat-error *ngIf="secondFormGroup.get('placa')?.hasError('pattern')"> Formato de placa <strong>
+                                Invalida (Ejm: ABC123)</strong> </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Color</mat-label>
+                        <input matInput oninput="this.value = this.value.toUpperCase()" formControlName="color"
+                            type="text" [(ngModel)]="vehiculo.color" required>
+                        <mat-error *ngIf="secondFormGroup.get('color')?.hasError('required')">Ingrese <strong> Color
+                            </strong> </mat-error>
+                        <mat-error *ngIf="secondFormGroup.get('color')?.hasError('pattern')"> Solo Ingrese <strong>
+                                Letras </strong> </mat-error>
+                    </mat-form-field>
+
+                </div>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Numero de Chasis (Opcional)</mat-label>
+                    <input matInput oninput="this.value = this.value.toUpperCase()" formControlName="nroChasis"
+                        type="text" [(ngModel)]="vehiculo.nroChasis">
+                    <mat-error *ngIf="secondFormGroup.get('nroChasis')?.hasError('maxLength')">Ingrese solo <strong> 17
+                            Caracteres </strong> </mat-error>
+                </mat-form-field>
+
+                <div fxFlex="100" fxLayoutGap="20px" fxLayout="row">
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Marca</mat-label>
+                        <input matInput oninput="this.value = this.value.toUpperCase()" formControlName="marca"
+                            type="text" [(ngModel)]="vehiculo.marca" required>
+                        <mat-error *ngIf="secondFormGroup.get('marca')?.hasError('required')">Ingrese <strong> Marca
+                            </strong> </mat-error>
+                        <mat-error *ngIf="secondFormGroup.get('marca')?.hasError('pattern')"> Solo Ingrese <strong>
+                                Letras </strong> </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Modelo</mat-label>
+                        <input matInput oninput="this.value = this.value.toUpperCase()" formControlName="modelo"
+                            type="text" [(ngModel)]="vehiculo.modelo" required>
+                        <mat-error *ngIf="secondFormGroup.get('modelo')?.hasError('required')">Ingrese <strong> Modelo
+                            </strong> </mat-error>
+                        <mat-error *ngIf="secondFormGroup.get('modelo')?.hasError('pattern')"> Solo Ingrese <strong>
+                                Letras </strong> </mat-error>
+                    </mat-form-field>
+
+                </div>
+
+            </div>
+
+            <div style="padding-top: 20px;" fxLayout="row" fxLayoutGap="20" fxFlexAlign="end center">
+                <span class="spacer"></span>
+                <button mat-flat-button color="warn" [disabled]="!isDisable2" (click)="registrarVehiculo()">Registrar
+                    Vehiculo</button>
+                <button mat-button matStepperNext mat-flat-button color="primary" (click)="buscarVehiculo()"
+                    [disabled]="isDisable2">Siguiente</button>
+            </div>
+
+        </form>
+    </mat-step>
+
+    <mat-step [stepControl]="thirdFormGroup">
+        <form [formGroup]="thirdFormGroup">
+            <ng-template matStepLabel>Motivo</ng-template>
+            <h1>Ingresar el Motivo</h1>
+            <mat-divider></mat-divider>
+            <div fxLayout="row">
+                <span class="spacer"></span>
+                <h3> {{ fechaHoy | date:'mediumDate' }} </h3>
+            </div>
+            <div style="padding-top: 20px ;" fxLayout="column" fxLayoutGap="15px">
+                <mat-form-field appearance="fill">
+                    <label>Motivo del Prestamo de servicio</label>
+
+                    <textarea matInput formControlName="motivo"
+                        placeholder="Ingresar el motivo por el cual el Cliente solicita los Servicio " required
+                        [(ngModel)]="motivo.descripcion" maxlength="500">
+                </textarea>
+                    <mat-error *ngIf="thirdFormGroup.get('motivo')?.hasError('required')"> Ingrese un
+                        <strong>Motivo</strong> </mat-error>
+                    <mat-error *ngIf="thirdFormGroup.get('motivo')?.hasError('maxLength')"> Solo puede Ingresar <strong>
+                            500 Caracteres </strong> </mat-error>
+
+                </mat-form-field>
+            </div>
+            <div style="padding-top: 20px;" fxLayout="row" fxLayoutGap="20" fxFlexAlign="end center">
+                <span class="spacer"></span>
+                <button mat-flat-button color="warn" [disabled]="!isDisable3" (click)="registrarMotivo()">Registrar
+                    Motivo</button>
+                <button mat-flat-button color="primary" matStepperNext [disabled]="isDisable3">Siguiente</button>
+            </div>
+        </form>
+    </mat-step>
+
+    <mat-step [stepControl]="fifthFormGroup">
+        <form [formGroup]="fifthFormGroup">
+            <ng-template matStepLabel>Asignar Empleado</ng-template>
+
+            <div style="padding-top: 10px ;" fxLayout="column" fxLayoutGap="15px" [class.mat-elevation-z3]>
+            
+                <div fxLayout="row">
+                    <h1>Buscar Datos del Empleado</h1>
+                    <span class="spacer"></span>
+                    <button mat-flat-button color="primary" (click)="buscarUsuario()">
+                        <mat-icon>search</mat-icon>
+                    </button>
+                </div>
+
+                <mat-divider></mat-divider>
+    
+                <mat-form-field appearance="fill">
+                    <mat-label>D.N.I</mat-label>
+                    <input matInput formControlName="dni" type="text" [(ngModel)]="usuario.dni" >
+                </mat-form-field>
+    
+                <mat-form-field appearance="fill">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput formControlName="nombreUsuario" type="text" [(ngModel)]="usuario.nombreUsuario" >
+                </mat-form-field>
+    
+                <mat-form-field appearance="fill">
+                    <mat-label>Apellido</mat-label>
+                    <input matInput formControlName="apellidoUsuario" type="text" [(ngModel)]="usuario.apellidoUsuario" >
+                </mat-form-field>
+
+            </div>
+
+            <div style="padding-top: 20px;" fxLayout="row" fxLayoutGap="20" fxFlexAlign="end center">
+                <span class="spacer"></span>
+                <button mat-flat-button color="primary" matStepperNext [disabled]="isDisable4">Siguiente</button>
+            </div>
+
+        </form>
+
+    </mat-step>
+
+    <mat-step [stepControl]="forthFormGroup">
+        <form [formGroup]="forthFormGroup">
+            <ng-template matStepLabel>Resumen</ng-template>
+            <h1> Resumen de Registro</h1>
+
+            <div style="padding-bottom: 10px;">
+                <h2>Datos del Cliente</h2>
+                <mat-divider></mat-divider>
+                <h4> <strong> Nombre Cliente : </strong> {{ cliente.nombreCliente }} </h4>
+                <h4> <strong> Apellido Cliente : </strong> {{ cliente.apellidoCliente }} </h4>
+                <h4> <strong> Email: </strong> {{ cliente.email }} </h4>
+                <h4> <strong> Telefono: </strong> {{ cliente.telefono }} </h4>
+                <h4> <strong> D.N.I: </strong> {{ cliente.dni }} </h4>
+            </div>
+
+            <div style="padding-bottom: 10px;">
+                <h2>Datos del Vehiculo</h2>
+                <mat-divider></mat-divider>
+                <h4> <strong> Placa : </strong> {{ vehiculo.placa }} </h4>
+                <h4> <strong> Color : </strong> {{ vehiculo.color }} </h4>
+                <h4> <strong> Nro. Chasis: </strong> {{ vehiculo.nroChasis }} </h4>
+                <h4> <strong> Marca: </strong> {{ vehiculo.marca }} </h4>
+                <h4> <strong> Modelo: </strong> {{ vehiculo.modelo }} </h4>
+            </div>
+
+            <div style="padding-bottom: 10px;">
+                <h2>Motivo</h2>
+                <mat-divider></mat-divider>
+                <h4> <strong> Descripcion : </strong> {{ motivo.descripcion }} </h4>
+                <h4> <strong> Fecha : </strong> {{ motivo.fecha | date:'mediumDate' }} </h4>
+            </div>
+
+            <div style="padding-top: 20px;" fxLayout="row" fxLayoutGap="20" fxFlexAlign="end center">
+                <button mat-flat-button color="primary" matStepperNext (click)="close()">Finalizar</button>
+            </div>
+        </form>
+    </mat-step>
+
+</mat-stepper>
+
+<mat-dialog-actions>
+    <button mat-flat-button (click)="close()" color="warn">Cancelar</button>
+</mat-dialog-actions>
