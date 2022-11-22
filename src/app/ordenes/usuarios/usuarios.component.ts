@@ -16,7 +16,7 @@ export class UsuariosComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator !: MatPaginator;
 
   dataSource = new MatTableDataSource<User>();
-  displayedColumns : string[] = ['actions','dni','nombreUsuario','apellidoUsuario']
+  displayedColumns : string[] = ['actions','dniUsuario','nombreUsuario','apellidoUsuario']
 
   constructor(private matDialogRef: MatDialogRef<RegistroComponent>,
               @Inject(MAT_DIALOG_DATA) public usuarios : User[]) { 

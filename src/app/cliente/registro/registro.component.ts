@@ -21,7 +21,7 @@ export class RegistroComponent implements OnInit {
     apellidoCliente: '',
     email: '',
     telefono: '',
-    dni: '',
+    dniCliente: '',
   }
 
   clienteForm = new FormGroup({

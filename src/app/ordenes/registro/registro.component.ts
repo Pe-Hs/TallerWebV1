@@ -56,7 +56,7 @@ export class RegistroComponent implements OnInit {
   cliente : Cliente = {
     nombreCliente : '',
     apellidoCliente: '',
-    dni: '',
+    dniCliente: '',
     email: '',
     telefono: '',
     idCliente: '',
@@ -74,7 +74,7 @@ export class RegistroComponent implements OnInit {
     idUsuario: '',
     nombreUsuario: '',
     apellidoUsuario: '',
-    dni: '',
+    dniUsuario: '',
     domicilio: '',
     email: '',
     telefono: '',

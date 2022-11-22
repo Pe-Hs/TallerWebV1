@@ -4,7 +4,7 @@ export interface User {
     apellidoUsuario: string;
     email?:           string;
     telefono:        string;
-    dni:             string;
+    dniUsuario:             string;
     domicilio?:       string;
     idRol?:           number;
     idTaller?:        number;

@@ -23,10 +23,6 @@ import { UsuariosComponent } from 'src/app/ordenes/usuarios/usuarios.component';
   styles: [
   ],
   providers: [
-    {
-      provide: STEPPER_GLOBAL_OPTIONS,
-      useValue: { showError: true },
-    },
   ],
 })
 
@@ -45,7 +41,7 @@ export class StepperComponent implements OnInit {
     private matDialogRef: MatDialogRef<DashboardComponent>) { }
 
   ngOnInit(): void {
-    this.matDialogRef.updateSize('50%', 'auto');
+    
     this.userSerive.getUser()
       .subscribe(resp => this.usuarios = resp)
   }
@@ -58,7 +54,7 @@ export class StepperComponent implements OnInit {
     apellidoCliente: '',
     email: '',
     telefono: '',
-    dni: '',
+    dniCliente: '',
   }
 
   vehiculo: Vehiculo = {
@@ -84,13 +80,15 @@ export class StepperComponent implements OnInit {
     idTaller: 2,
     idUsuario: '',
     idVehiculo: '',
+    motivo: '',
+    fecha: '',
   }
 
   usuario : User = {
     idUsuario: '',
     nombreUsuario: '',
     apellidoUsuario: '',
-    dni: '',
+    dniUsuario: '',
     domicilio: '',
     email: '',
     telefono: '',
@@ -137,7 +135,7 @@ export class StepperComponent implements OnInit {
   isDisable3 = true;
   isDisable4 = true;
 
-  async buscarCliente() {
+  buscarCliente() {
 
     const snackBar = new MatSnackBarConfig();
     snackBar.duration = 1 * 1000;
@@ -148,7 +146,7 @@ export class StepperComponent implements OnInit {
       this.clienteService.findClienteId(this.cliente.nombreCliente,
         this.cliente.apellidoCliente,
         this.cliente.telefono,
-        this.cliente.dni)
+        this.cliente.dniCliente)
         .subscribe((resp) => {
           this.cliente = resp[0]
           this.snackBar.open('Cliente ID ' + this.cliente.idCliente, 'Cerrar', snackBar);
@@ -177,7 +175,7 @@ export class StepperComponent implements OnInit {
     }
   }
 
-  async buscarVehiculo(){
+  buscarVehiculo(){
     const snackBar = new MatSnackBarConfig();
     snackBar.duration = 1 * 1000;
 
@@ -226,15 +224,7 @@ export class StepperComponent implements OnInit {
       this.motivo.fecha = this.fechaHoy.toISOString();
       
       this.motivoService.postMotivo(this.motivo)
-        .subscribe((resp) =>   resp);
-
-      this.orden.idCliente = this.cliente.idCliente;
-      this.orden.idVehiculo = this.vehiculo.idVehiculo;
-      this.orden.idTaller = 2;
-      this.orden.idUsuario = undefined;
-
-      this.oredenesService.postOrden(this.orden)
-        .subscribe((resp) => resp)
+        .subscribe((resp) =>   resp);   
 
         this.snackBar.open('Motivo Registrado', 'Cerrar', snackBarCon);
 
@@ -262,6 +252,18 @@ export class StepperComponent implements OnInit {
       'top': '0',
       'left': '0',
     }
+  }
+
+  registrarOrden(){
+    this.orden.idCliente = this.cliente.idCliente;
+      this.orden.idVehiculo = this.vehiculo.idVehiculo;
+      this.orden.idTaller = 2;
+      this.orden.idUsuario = this.usuario.idUsuario;
+      this.orden.motivo = this.motivo.descripcion;
+      this.orden.fecha = this.fechaHoy.toISOString();
+
+      this.oredenesService.postOrden(this.orden)
+        .subscribe((resp) => resp)
   }
 
   close() {

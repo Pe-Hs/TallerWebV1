@@ -33,7 +33,7 @@ export class DetallesComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
     this.VehiculoService.getVehiculosbyIdCliente(this.cliente.idCliente)
       .subscribe(resp => this.dataSource.data = resp);
-    this.matDialogRef.updateSize('40%', 'auto'); 
+    this.matDialogRef.updateSize('45%', 'auto'); 
   }
 
   buscarMotivos(vehiculo : Vehiculo){

@@ -1,0 +1,86 @@
+<div class="intro">
+    <h1>Listado de <strong>Productos</strong> </h1>
+  
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <h3>Taller > Inventario </h3>
+      <h3> {{ myDate | date: 'fullDate'}} </h3>
+    </div>
+  </div>
+  
+  <div style="padding-left: 20px; padding-right: 20px; padding-top: 20px;">
+
+    <div style="height: 60px;">
+
+      <button mat-raised-button color="primary">
+        <mat-icon>add</mat-icon>
+        Agregar Vehiculo
+      </button>
+  
+    </div>
+    
+    <div class="filter" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20">
+  
+      <div style="width: 10px;"></div>
+      <mat-icon>filter_list</mat-icon>
+      <mat-form-field appearance="standard">
+        <input matInput (keyup)="applyFilter($event)" placeholder="Buscar..." #input>
+      </mat-form-field>
+      <div style="width: 40px;"></div>
+    </div>
+  
+  </div>
+  
+  <div style="padding-left: 20px; padding-right: 20px;">
+  
+    <mat-table [dataSource]="dataSource">
+  
+      <ng-container matColumnDef="codigoProducto">
+        <mat-header-cell *matHeaderCellDef> COD. PRODUCTO </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.codigoProducto}} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="nombreCategoria">
+        <mat-header-cell *matHeaderCellDef> CATEGORIA </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.nombreCategoria}} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="nombreMarca">
+        <mat-header-cell *matHeaderCellDef> MARCA </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.nombreMarca}} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="stock">
+        <mat-header-cell *matHeaderCellDef> STOCK </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.stock}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="costo">
+        <mat-header-cell *matHeaderCellDef> COSTO </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.costo}} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="actions">
+  
+        <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+  
+        <mat-cell *matCellDef="let element">
+  
+          <button mat-button>
+            <mat-icon>visibility</mat-icon>
+          </button>
+  
+          <button mat-button>
+            <mat-icon>edit</mat-icon>
+          </button>
+  
+        </mat-cell>
+  
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  
+    <mat-paginator #paginator [pageIndex]="0" [pageSize]="5" [pageSizeOptions]="[5, 10, 15]"></mat-paginator>
+    <div style="height: 30px;"></div>
+  </div>

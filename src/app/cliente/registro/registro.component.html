@@ -64,7 +64,7 @@
                     <input matInput
                            type="text"
                            formControlName="dni"
-                           [(ngModel)]="cliente.dni"
+                           [(ngModel)]="cliente.dniCliente"
                            required>
                         <mat-error *ngIf="clienteForm.get('dni')?.hasError('required')">Ingrese <strong>  DNI </strong> </mat-error>
                         <mat-error *ngIf="clienteForm.get('dni')?.hasError('pattern')"> Solo Ingrese <strong>  Numeros </strong> </mat-error>

@@ -29,7 +29,7 @@ export class RegistroComponent implements OnInit {
     idUsuario: '',
     nombreUsuario: '',
     apellidoUsuario: '',
-    dni: '',
+    dniUsuario: '',
     domicilio: '',
     email: '',
     telefono: '',

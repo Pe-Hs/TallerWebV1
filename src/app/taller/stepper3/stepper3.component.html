@@ -70,7 +70,7 @@
 
                     <mat-form-field appearance="fill">
                         <mat-label>D.N.I</mat-label>
-                        <input matInput formControlName="dni" type="text" [(ngModel)]="cliente.dni" required>
+                        <input matInput formControlName="dni" type="text" [(ngModel)]="cliente.dniCliente" required>
                         <mat-error *ngIf="firstFormGroup.get('dni')?.hasError('required')">Ingrese <strong> DNI
                             </strong> </mat-error>
                         <mat-error *ngIf="firstFormGroup.get('dni')?.hasError('pattern')"> Solo Ingrese <strong> Numeros
@@ -235,7 +235,7 @@
     
                 <mat-form-field appearance="fill">
                     <mat-label>D.N.I</mat-label>
-                    <input matInput formControlName="dni" type="text" [(ngModel)]="usuario.dni" >
+                    <input matInput formControlName="dni" type="text" [(ngModel)]="usuario.dniUsuario" >
                 </mat-form-field>
     
                 <mat-form-field appearance="fill">
@@ -271,7 +271,7 @@
                 <h4> <strong> Apellido Cliente : </strong> {{ cliente.apellidoCliente }} </h4>
                 <h4> <strong> Email: </strong> {{ cliente.email }} </h4>
                 <h4> <strong> Telefono: </strong> {{ cliente.telefono }} </h4>
-                <h4> <strong> D.N.I: </strong> {{ cliente.dni }} </h4>
+                <h4> <strong> D.N.I: </strong> {{ cliente.dniCliente  }} </h4>
             </div>
 
             <div style="padding-bottom: 10px;">

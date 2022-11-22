@@ -23,7 +23,7 @@ export class ListadoComponent implements OnInit, AfterViewInit {
 
   dataSource = new MatTableDataSource<User>();
 
-  displayedColumns: string[] = ['nombreUsuario', 'apellidoUsuario', 'dni', 'email', 'actions'];
+  displayedColumns: string[] = ['nombreUsuario', 'apellidoUsuario', 'dniUsuario', 'email', 'actions'];
 
   myDate = new Date();
 

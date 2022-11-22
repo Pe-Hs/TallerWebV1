@@ -3,6 +3,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { OrdenesService } from '../service/ordenes.service';
 import { Orden } from '../interfaces/orden.interface';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { DetallesComponent } from '../detalles/detalles.component';
 
 @Component({
   selector: 'app-listado',
@@ -16,15 +18,25 @@ export class ListadoComponent implements OnInit, AfterViewInit {
 
   myDate = new Date();
 
-  displayedColumns: string[] = ['placa','marca','nombreCliente','nombreUsuario','actions'];
+  displayedColumns: string[] = ['codigoOrden','placa','marca','nombreCliente','nombreUsuario','actions'];
   
   constructor(private OrdenesService: OrdenesService,
+    private matDialog: MatDialog,
               ) {  }
 
   ngOnInit(): void {
     this.dataSource.paginator = this.paginator;   
     this.OrdenesService.getOrdenes()
       .subscribe(ordenes => this.dataSource.data = ordenes)
+  }
+
+  detallesOrden(orden : Orden){
+    const matDialogConfig = new MatDialogConfig();
+
+    matDialogConfig.disableClose = true;
+    matDialogConfig.data = orden;
+
+    this.matDialog.open(DetallesComponent ,matDialogConfig);
   }
 
   applyFilter(event: Event) {

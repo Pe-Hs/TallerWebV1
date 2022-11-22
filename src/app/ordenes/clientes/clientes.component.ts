@@ -19,7 +19,7 @@ export class ClientesComponent implements OnInit {
              @Inject(MAT_DIALOG_DATA) public clientes : Cliente[]) { }
 
   dataSource = new MatTableDataSource<Cliente>();
-  displayedColumns: string[] = ['actions','dni','nombreCliente','apellidoCliente'];
+  displayedColumns: string[] = ['actions','dniCliente','nombreCliente','apellidoCliente'];
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

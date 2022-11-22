@@ -11,6 +11,7 @@ import { ClientesComponent } from './clientes/clientes.component';
 import { VehiculosComponent } from './vehiculos/vehiculos.component';
 import { ServiciosComponent } from './servicios/servicios.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
+import { DetallesComponent } from './detalles/detalles.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
     ClientesComponent,
     VehiculosComponent,
     ServiciosComponent,
-    UsuariosComponent
+    UsuariosComponent,
+    DetallesComponent
   ],
   imports: [
     CommonModule,

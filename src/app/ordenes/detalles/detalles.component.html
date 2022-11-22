@@ -1,0 +1,186 @@
+<mat-dialog-content fxLayout="column" fxLayoutGap="10">
+
+    <div>
+        <h2><strong>Numero de Orden: </strong> {{orden.codigoOrden}} </h2>
+        
+        <mat-divider></mat-divider>
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="10">
+
+        <div fxLayout="column" fxFlex="40">
+            <mat-card>
+                <div style="padding-bottom: 10px;">
+                    <h2>Datos del Empleado</h2>
+                    <mat-divider></mat-divider>
+                </div>
+
+                <div fxLayout="row" fxLayoutGap="5">
+                    <div fxFlex="50">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Nombre Cliente</mat-label>
+                            <input matInput [(ngModel)]="orden.nombreCliente"  [disabled]="true">
+                        </mat-form-field>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Apellido Cliente</mat-label>
+                            <input matInput [value]="orden.apellidoCliente" [disabled]="true">
+                        </mat-form-field>
+                    </div>
+                    <div fxFlex="50">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Nombre Cliente</mat-label>
+                            <input matInput [(ngModel)]="orden.nombreCliente"  [disabled]="true">
+                        </mat-form-field>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Apellido Cliente</mat-label>
+                            <input matInput [value]="orden.apellidoCliente" [disabled]="true">
+                        </mat-form-field>
+                    </div>
+                </div>
+
+            </mat-card>
+        </div>
+
+        <div fxLayout="column" fxFlex="60">
+
+            <mat-card>
+
+                <div fxLayout="row" fxLayoutGap="10">
+
+                    <div fxLayout="column" fxFlex="50" >
+
+                        <div style="padding-bottom: 10px;">
+                            <h2>Datos del Cliente</h2>
+                            <mat-divider></mat-divider>
+                        </div>
+
+                        <div fxLayout="row" fxLayoutGap="5">
+
+                            <div fxFlex="50">
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Nombre Cliente</mat-label>
+                                    <input matInput [(ngModel)]="orden.nombreCliente"  [disabled]="true">
+                                </mat-form-field>
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Apellido Cliente</mat-label>
+                                    <input matInput [value]="orden.apellidoCliente" [disabled]="true">
+                                </mat-form-field>
+                            </div>
+
+                            <div fxFlex="50">
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Nombre Cliente</mat-label>
+                                    <input matInput [(ngModel)]="orden.nombreCliente"  [disabled]="true">
+                                </mat-form-field>
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Apellido Cliente</mat-label>
+                                    <input matInput [value]="orden.apellidoCliente" [disabled]="true">
+                                </mat-form-field>
+                            </div>
+
+                        </div>
+                       
+                    </div>
+
+                    <div fxLayout="column" fxFlex="50" >
+
+                        <div style="padding-bottom: 10px;">
+                            <h2>Datos del Vehiculo</h2>
+                            <mat-divider></mat-divider>
+                        </div>
+
+                        <div fxLayout="row" fxLayoutGap="5">
+
+                            <div fxFlex="50">
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Nombre Cliente</mat-label>
+                                    <input matInput [(ngModel)]="orden.nombreCliente"  [disabled]="true">
+                                </mat-form-field>
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Apellido Cliente</mat-label>
+                                    <input matInput [value]="orden.apellidoCliente" [disabled]="true">
+                                </mat-form-field>
+                            </div>
+
+                            <div fxFlex="50">
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Nombre Cliente</mat-label>
+                                    <input matInput [(ngModel)]="orden.nombreCliente"  [disabled]="true">
+                                </mat-form-field>
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Apellido Cliente</mat-label>
+                                    <input matInput [value]="orden.apellidoCliente" [disabled]="true">
+                                </mat-form-field>
+                            </div>
+                           
+                        </div>
+                        
+                    </div>
+
+                </div>
+
+            </mat-card>
+
+        </div>
+
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="10" style="padding-bottom: 10px;">
+        <div fxFlex="40">
+            <mat-table [dataSource]="detalleEstado" [class.mat-elevation-z2]="true" >
+
+                <ng-container matColumnDef="fecha">
+                    <mat-header-cell *matHeaderCellDef> FECHA </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.fecha | date: 'mediumDate' }} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="hora">
+                    <mat-header-cell *matHeaderCellDef> HORA </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.hora | date:'shortTime' }} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="nombreEstado">
+                    <mat-header-cell *matHeaderCellDef> ESTADO </mat-header-cell>
+                    <mat-cell *matCellDef="let element" [ngStyle]="{'background-color': element.nombreEstado == 'RECIBIDO' ? '#EEC55A' : 
+                                                        element.nombreEstado == 'AUTORIZADO' ? '#A643E2' : 
+                                                        element.nombreEstado == 'EN PROCESO' ? '#4983DA' : 
+                                                        element.nombreEstado == 'FINALIZADO' ? '#51B422' : ''
+                                    }">
+                      {{element.nombreEstado}}
+                    </mat-cell>
+                  </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
+        </div>
+        <div fxFlex="60">
+            <mat-table [dataSource]="detalleServicio" [class.mat-elevation-z2]="true" >
+
+                <ng-container matColumnDef="nombreServicio">
+                    <mat-header-cell *matHeaderCellDef> SERVICIOS </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.nombreServicio}} </mat-cell>
+                    <mat-footer-cell *matFooterCellDef> TOTAL </mat-footer-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="costo">
+                    <mat-header-cell *matHeaderCellDef> COSTO (S/.) </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.costo}} </mat-cell>
+                    <mat-footer-cell *matFooterCellDef> {{getTotalCost()}} </mat-footer-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns2"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns2;"></mat-row>
+                <mat-footer-row *matFooterRowDef="displayedColumns2"></mat-footer-row>
+            </mat-table>
+        </div>
+    </div>
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button mat-flat-button color="warn"
+            (click)="close()">
+        Cerrar
+    </button>
+</mat-dialog-actions>

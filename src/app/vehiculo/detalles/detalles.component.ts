@@ -28,7 +28,7 @@ export class DetallesComponent implements OnInit {
     apellidoCliente: '',
     email: '',
     telefono: '',
-    dni: ''
+    dniCliente: ''
   }
 
   motivos : Motivo[] = [];

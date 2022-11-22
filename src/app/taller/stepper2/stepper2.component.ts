@@ -44,7 +44,7 @@ export class Stepper2Component implements OnInit {
     apellidoCliente: '',
     email: '',
     telefono: '',
-    dni: '',
+    dniCliente: '',
   }
 
   vehiculo: Vehiculo = {
@@ -70,13 +70,15 @@ export class Stepper2Component implements OnInit {
     idTaller: 2,
     idUsuario: '',
     idVehiculo: '',
+    motivo: '',
+    fecha:''
   }
 
   usuario : User = {
     idUsuario: '',
     nombreUsuario: '',
     apellidoUsuario: '',
-    dni: '',
+    dniUsuario: '',
     domicilio: '',
     email: '',
     telefono: '',
@@ -187,6 +189,8 @@ export class Stepper2Component implements OnInit {
     this.orden.idVehiculo = this.vehiculo.idVehiculo;
     this.orden.idTaller = 2;
     this.orden.idUsuario = this.usuario.idUsuario;
+    this.orden.motivo = this.motivo.descripcion;
+    this.orden.fecha = this.fechaHoy.toISOString();
 
     this.ordenesService.postOrden(this.orden)
       .subscribe((resp) => resp)
@@ -223,14 +227,6 @@ export class Stepper2Component implements OnInit {
       this.motivoService.postMotivo(this.motivo)
         .subscribe((resp) =>   resp);
 
-      this.orden.idCliente = this.cliente.idCliente;
-      this.orden.idVehiculo = this.vehiculo.idVehiculo;
-      this.orden.idTaller = 2;
-      this.orden.idUsuario = undefined;
-
-      this.ordenesService.postOrden(this.orden)
-        .subscribe((resp) => resp)
-
         this.snackBar.open('Motivo Registrado', 'Cerrar', snackBarCon);
 
         this.isDisable3 = false;
@@ -240,6 +236,8 @@ export class Stepper2Component implements OnInit {
     }
     
   }
+
+  
   
   ngOnInit(): void {
     this.clienteService.getCliente()

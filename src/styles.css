@@ -21,6 +21,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     justify-content:center;
 }
 
+.mat-footer-cell  {
+    text-align: center;
+    justify-content:center;
+    font-weight: bold;
+}
+
 
 .filter{
     background-color: #424242;

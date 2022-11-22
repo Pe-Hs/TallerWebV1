@@ -8,14 +8,14 @@
 
 <div style="padding-left: 20px; padding-right: 20px; padding-top: 20px;">
 
-  <div style="height: 60px;">
+  <!-- <div style="height: 60px;">
 
     <button mat-raised-button color="primary" routerLink="/ordenTrabajo/registro">
       <mat-icon>add</mat-icon>
       Agregar Orden
     </button>
 
-  </div>
+  </div> -->
 
   <div class="filter" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20">
 
@@ -31,6 +31,11 @@
 <div style="padding-left: 20px; padding-right: 20px;">
 
   <mat-table [dataSource]="dataSource">
+
+    <ng-container matColumnDef="codigoOrden">
+      <mat-header-cell *matHeaderCellDef> NRO. ORDEN </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.codigoOrden}} </mat-cell>
+    </ng-container>
 
     <ng-container matColumnDef="placa">
       <mat-header-cell *matHeaderCellDef> PLACA </mat-header-cell>
@@ -69,7 +74,7 @@
 
       <mat-cell *matCellDef="let element">
 
-        <button mat-button>
+        <button mat-button (click)="detallesOrden(element)">
           <mat-icon>info</mat-icon>
         </button>
 
